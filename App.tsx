@@ -1,14 +1,16 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { View } from 'react-native';
 import { UIProvider } from './src/UIProvider';
-import KnowledgeBaseView from './src/modules/KnowledgeBaseView/ui';
+import { RootNavigation } from './src/navigation/RootNavigation';
+import { NetInfoStatus } from './src/UIKit/NetInfoStatus';
 
 const App = () => {
   return (
     <UIProvider>
-      <SafeAreaView style={{ flex: 1 }}>
-        <KnowledgeBaseView items={[]} />
-      </SafeAreaView>
+      <View style={{ flex: 1 }}>
+        <RootNavigation />
+        <NetInfoStatus />
+      </View>
     </UIProvider>
   );
 };
