@@ -2,38 +2,35 @@ import { useEffect } from 'react';
 import { useKnowledgeBaseStore } from '../../../store/knowledgeBaseStore';
 import { EducationTypesEnum, IKnowledgeBaseListItem } from '../../../entities/knowledgeBaseList/IKnowledgeBaseListItem';
 
+const BASE_URL = 'https://api-lms.opdev.pp.ua/api/v1';
+const TOKEN = '631|kHXehU4n1ekAK3krwlEqblNDtv8aUx2DLLwKEjnA4f9a3933'
+
 export const useKnowledgeBase = () => {
     const { setItems, items } = useKnowledgeBaseStore();
 
     useEffect(() => {
-        const mockData: IKnowledgeBaseListItem[] = [
-            {
-                id: 1,
-                contentId: 1,
-                name: 'React Native',
-                slug: 'react-native',
-                description: 'Офіційна документація',
-                image: { id: 1, url: 'https://reactnative.dev/img/header_logo.svg' },
-                createdAt: '2024-01-01',
-                updatedAt: '2024-01-01',
-                sortNumber: 1,
-                type: EducationTypesEnum.DOCUMENT,
-                itemCounts: {
-                    FOLDER: 0,
-                    DOCUMENT: 5,
-                    COURSE: 0,
-                    QUIZ: 0,
-                    QUESTIONNAIRE: 0,
-                    ANNOUNCEMENT: 0,
-                },
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/knowledge-base?offset=0&limit=20&sortedDirection=ASC`,
+          {
+            headers: {
+              'accept': '*/*',
+              'x-partner': 'dev',
+              'Authorization': `Bearer ${TOKEN}`,
             },
-        ];
+          }
+        );
 
-        setItems(mockData);
-    }, [setItems]);
-
-    return {
-        items,
-        setItems,
+        const data = await response.json();
+        setItems(data.rows);
+      } catch (error) {
+        console.error('Помилка при отриманні бази знань:', error);
+      }
     };
+
+    fetchData();
+  }, [setItems]);
+
+  return { items: Array.isArray(items) ? items : [] };
 };
