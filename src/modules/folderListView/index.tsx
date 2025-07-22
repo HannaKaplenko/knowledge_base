@@ -10,7 +10,6 @@ interface FolderItem {
 const FolderListView = () => {
   const route = useRoute();
   const { slug } = route.params as { slug: string };
-
   const [items, setItems] = useState<FolderItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
