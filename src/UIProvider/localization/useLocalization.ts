@@ -10,26 +10,29 @@ i18n.translations = { uk, en };
 
 export const useLocalization = () => {
     const [locale, setLocale] = useState<string>("uk");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getLanguage();
+        const loadLanguage = async () => {
+            const data = await storage.getItem("LANGUAGE");
+            if (data === "en" || data === "uk") {
+                setLocale(data);
+                i18n.locale = data;
+            }
+            setLoading(false);
+        };
+        loadLanguage();
     }, []);
 
-    const getLanguage = async () => {
-        const data = await storage.getItem("LANGUAGE");
-        if (data === "en" || data === "uk" || data === "ru") {
-            setLocale(data);
-            i18n.locale = data;
-        }
-    }
+    useEffect(() => {
+        i18n.locale = locale;
+    }, [locale]);
 
-    const locales = useMemo(() => {
-        return Object.keys(i18n.translations);
-    }, []);
+    const locales = useMemo(() =>
+        Object.keys(i18n.translations), []);
 
-    const onHandleChangeLocale = async (newLanguage: "uk" | "en" | "ru" | string) => {
+    const onHandleChangeLocale = async (newLanguage: "uk" | "en" | string) => {
         setLocale(newLanguage);
-        i18n.locale = newLanguage;
         await storage.setItem("LANGUAGE", newLanguage);
 
     };
@@ -38,5 +41,5 @@ export const useLocalization = () => {
         return i18n.t(key, { locale: locale, ...params });
     };
 
-    return { locales, locale, onHandleChangeLocale, t };
+    return { locales, locale, onHandleChangeLocale, t, loading };
 }

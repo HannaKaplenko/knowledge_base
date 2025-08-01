@@ -1,5 +1,17 @@
 {
-  "knowledge_base": {
-    "title": "Knowledge Base"
+  "knowledgeBase": {
+    "title": "Knowledge Base",
+    "inputMessage": "Documents search"
+  },
+  "useKnowledgeBase": {
+    "errorMessage": "Error while getting knowledge base"
+  },
+  "useFolder": {
+    "errorMessage": "Error while loading"
+  },
+  "settings": {
+    "greetingMessage": "Welcome to Settings!",
+    "chooseLanguage": "Choose the language",
+    "language": "Language"
   }
 }

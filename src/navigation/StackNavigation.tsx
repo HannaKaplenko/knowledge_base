@@ -4,6 +4,8 @@ import { useUIContext } from '../UIProvider';
 import { SplashView } from '../modules/splashView/ui';
 import KnowledgeBaseView from '../modules/KnowledgeBaseView/ui';
 import FolderListView from '../modules/folderListView';
+import { ChangeLocaleView } from '../modules/LanguageView/ui';
+import { SettingsView } from '../modules/settingsView/ui';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,9 +13,12 @@ export const StackNavigation = () => {
     const { t } = useUIContext();
     return (
         <Stack.Navigator initialRouteName='SplashView'>
-              <Stack.Screen name="SplashView" component={SplashView} options={{ headerShown: false }} />
-            <Stack.Screen name="KnowledgeBaseView" component={KnowledgeBaseView}/>
+            <Stack.Screen name="SplashView" component={SplashView} options={{ headerShown: false }} />
+            <Stack.Screen name="KnowledgeBaseView" component={KnowledgeBaseView} />
             <Stack.Screen name="FolderListView" component={FolderListView} />
+            <Stack.Screen name="SettingsView" component={SettingsView} />
+            <Stack.Screen name="ChangeLocaleView" component={ChangeLocaleView} options={{ headerShown: true, title: 'Change Language' }}
+            />
 
         </Stack.Navigator>
     );

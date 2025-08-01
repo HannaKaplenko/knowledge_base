@@ -9,7 +9,7 @@ export const SplashView = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Ur Needs</Text>
+            <Text style={styles.title}>Knowledge Base</Text>
         </View>
     );
 };

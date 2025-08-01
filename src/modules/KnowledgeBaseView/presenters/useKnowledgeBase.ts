@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useKnowledgeBaseStore } from '../../../store/knowledgeBaseStore';
-import { EducationTypesEnum, IKnowledgeBaseListItem } from '../../../entities/knowledgeBaseList/IKnowledgeBaseListItem';
+import { useUIContext } from '../../../UIProvider';
 
 const BASE_URL = 'https://api-lms.opdev.pp.ua/api/v1';
 const TOKEN = '631|kHXehU4n1ekAK3krwlEqblNDtv8aUx2DLLwKEjnA4f9a3933'
 
 export const useKnowledgeBase = () => {
-    const { setItems, items } = useKnowledgeBaseStore();
+  const { setItems, items } = useKnowledgeBaseStore();
+  const { t } = useUIContext();
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -25,7 +26,7 @@ export const useKnowledgeBase = () => {
         const data = await response.json();
         setItems(data.rows);
       } catch (error) {
-        console.error('Помилка при отриманні бази знань:', error);
+        console.error(t("useKnowledgeBase.errorMessage"), error);
       }
     };
 

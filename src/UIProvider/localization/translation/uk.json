@@ -1,5 +1,17 @@
 {
-  "knowledge_base": {
-    "title": "База знань"
+  "knowledgeBase": {
+    "title": "База знань",
+    "inputMessage": "Пошук документів"
+  },
+  "useKnowledgeBase": {
+    "errorMessage": "Error while getting knowledge base"
+  },
+  "useFolder": {
+    "errorMessage": "Помилка при завантаженні папки"
+  },
+  "settings": {
+    "greetingMessage": "Ласкаво просимо в налаштування!",
+    "chooseLanguage": "Виберіть мову",
+    "language": "Мова"
   }
 }

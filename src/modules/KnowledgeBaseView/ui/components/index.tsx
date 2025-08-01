@@ -36,17 +36,19 @@ const KnowledgeBaseViewUI = ({ items }: Props) => {
           <Chevron width={24} height={24} color="#FFFFFF" position="LEFT" />
         </View>
         <View style={styles.titleWrapper}>
-          <Text style={styles.title}>{t('knowledge_base.title')}</Text>
+          <Text style={styles.title}>{t('knowledgeBase.title')}</Text>
         </View>
         <View style={styles.sideIcon}>
-          <SettingsGridIcon />
+          <TouchableOpacity onPress={() => navigation.navigate("SettingsView")}>
+            <SettingsGridIcon />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.searchContainer}>
         <SearchIcon />
         <TextInput
           style={styles.searchInput}
-          placeholder="Пошук документів"
+          placeholder={t('knowledgeBase.inputMessage')}
           placeholderTextColor="#BBB"
           value={search}
           onChangeText={setSearch}
